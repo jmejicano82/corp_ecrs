@@ -1,224 +1,171 @@
 <?php
-
 //error_reporting(-1);
 
-if(isset($_GET["buscar"])){
-    $productos= $Shop->searchProducto($_GET["buscar"],"relevancia desc",0,999);
-    $rscch2["results"]  = array('');
-}else{
-    $rscch = $Shop->getCategoria(array("pk_categoria"=>intval($_GET["i"])));
-    $rscch2 = $Shop->getCategoria(array("fk_categoria_padre"=>intval($_GET["i"])));
+if (isset($_GET["buscar"])) {
+    $productos = $Shop->searchProducto($_GET["buscar"], "relevancia desc", 0, 999);
+    $rscch2["results"] = array('');
+} else {
+    $rscch = $Shop->getCategoria(array("pk_categoria" => intval($_GET["i"])));
+    $rscch2 = $Shop->getCategoria(array("fk_categoria_padre" => intval($_GET["i"])));
 }
 ?>
-<style type="text/css">
-td modules img {display: block;}.texto11 {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    color: #666;
-    text-align: justify;
-}
-.titulo1 {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    color: #333;
-}
-.titulo21 {
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 12px;
-    color: #a30327;
-    font-weight: bold;
-}
-.Mapa {font-size: 24px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: normal;
-}
-.texto2 {font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    color: #666;
-    text-align: left;
-    vertical-align: top;
-}
-</style>
+
 <script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
-<table width="980" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th valign="top" scope="col"><?= $Banners->showBanners(10,intval($_GET["i"]));?></th>
-              </tr>
-          </table>
-            <table width="983" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top: 8px;">
-              <tr>
-              <th colspan="7" background="images/new/titulo.jpg" style="text-align: left"><span class="titulo1"><span class="Mapa">&nbsp;&nbsp;<?=_("Productos")?> &gt;&gt; <?php if(isset($_GET["buscar"])){ echo _("Búsqueda"); }else{ echo $rscch["results"][0]["categoria" .$_SESSION["LOCALE"]]; }?></span></span></th>
-              <td><img src="images/new/spacer.gif" width="1" height="35" border="0" alt="" /></td>
-            </tr>            
-        </table>
-            <br />
-            <table width="980" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="720" valign="top" scope="col"><table width="676" border="0" cellspacing="0" cellpadding="0" align="center">
-                  <tr>
-                    <th scope="col">
-                   
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                          <th style="text-align: left;" align="left" valign="top" scope="col">
-                           <?php if(!isset($_GET["buscar"])){ ?>
-                          <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+
+
+
+<!-- banner start -->
+<!-- ================ -->
+<div class="banner">
+
+    <!-- slideshow start -->
+    <!-- ================ -->
+    <div class="slideshow white-bg">
+
+        <!-- slider revolution start -->
+        <!-- ================ -->
+        <div class="slider-banner-container">
+            <div class="slider-banner-3">
+                <ul>
+                    <!-- slide 1 start -->
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" data-saveperformance="on" data-title="Slide 1">
+
+                        <!-- main image -->
+                        <img class="fade" src="modules/img/slider-2-slide-1.jpg" alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption very_large_text sft tp-resizeme" data-x="center" data-y="70" data-speed="700" data-start="200" data-end="10000" data-endspeed="">Cajas Registradoras Fiscales
+                        </div>
+
+                        <!-- LAYER NR. 2 -->
+                        <h2 class="tp-caption small_thin_white sfb text-center tp-resizeme" data-x="center" data-y="170" data-speed="700" data-start="400" data-end="10000" data-endspeed="">Las características y especificaciones técnicas de las Cajas Registradoras Fiscales QUORiON <br>le permiten adaptarse a cada uno de los requerimeintos de su negocio, ofreciendole una gran variedad de funciones para el control <br>y manejo de sus ventas. Consulte con su Distribuidor más cercano...!
+                        </h2>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- slider revolution end -->
+    </div>
+    <!-- slideshow end -->
+</div>
+<!-- banner end -->
+
+
+<section class="main-container object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="200">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-12">
+
+                <div class="filters text-center">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#" data-filter="*">Todas</a></li>
+                        <li><a href="#" data-filter=".portatiles">Portátiles</a></li>
+                        <li><a href="#" data-filter=".ventas-menor">Ventas al por menor</a></li>
+                        <li><a href="#" data-filter=".multi">Multiples Propósitos</a></li>
+                    </ul>
+                </div>
+                <!-- isotope filters end -->
+
+            </div>
+            <!-- main end -->
+        </div>
+    </div>
+    
+<div class="container">    
+
+    <div class="gray-bg section">
+        <div class="container">
+            <div class="isotope-container row grid-space-11">
+
+                <?php foreach ($rscch2["results"] as $k => $v) { ?>
+                    <?php if (!isset($_GET["buscar"])) { ?>
+                        <br />
+
+                        <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                             <tr>
-                              <th scope="col"><p class="productodeta_text"><?=$rscch["results"][0]["texto" .$_SESSION["LOCALE"]]?>
-                                </p></th>
+                                <th align="left" scope="col" style="text-align:justify"><span class="trebuchet_gris15"><strong><?= $v["categoria"] ?></strong></span><br />
+                                    <?= $v["texto"] ?></th>
                             </tr>
-                          </table>
-                          <?php } ?>
-                          <?php foreach($rscch2["results"] as $k=>$v ){ ?>
-                            <?php if(!isset($_GET["buscar"])){ ?>
-                            <br />
-                            
-                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                              <tr>
-                                <th align="left" scope="col" style="text-align:justify"><span class="trebuchet_gris15"><strong><?=$v["categoria"]?></strong></span><br />
-                                 <?=$v["texto"]?></th>
-                              </tr>
-                            </table>
-                            <br />
-                            <?php } ?>
-                            
-                            <?php if(isset($_GET["buscar"]) && sizeof($productos["results"])==0){ ?>
-                            
-                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                              <tr>
-                                <th align="left" scope="col" align="center" class="producto_tituhome">Su búsqueda no arrojó resultados</th>
-                              </tr>
-                            </table>
-                            <br />
-                            <?php } ?>
-                            
-                            <table width="662" border="0" align="center" cellpadding="10" cellspacing="0">
+                        </table>
+                        <br />
+                    <?php } ?>
+
+                    <?php if (isset($_GET["buscar"]) && sizeof($productos["results"]) == 0) { ?>
+
+                        <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                             <tr>
-                            <th  scope="col">
-                            <?php     
-                            if(trim($_GET["buscar"])==''){
-                                 $params = array(
-                                 TBL_PRODUCTOS_VS_CATEGORIAS . ".fk_categoria" => $v["pk_categoria"],
-                                 TBL_PRODUCTOS_VS_CATEGORIAS . ".fk_estatus" => 1,
-                                 TBL_PRODUCTOS . ".fk_estatus" => 1
-                                );
-                                $productos=$Shop->getProducto($params,0,99);     
-                            }
-                             
-                            //echo sizeof($productos["results"]);
-                            
-                            if(sizeof($productos["results"])>0)
-                                for($a=0; $a<sizeof($productos["results"]);$a=$a+2){                            
-                            ?>                            
-                                                              
-                            
+                                <th align="left" scope="col" align="center" class="producto_tituhome">Su búsqueda no arrojó resultados</th>
+                            </tr>
+                        </table>
+                        <br />
+                    <?php
+                    }
+                    if (trim($_GET["buscar"]) == '') {
+                        $params = array(
+                            TBL_PRODUCTOS_VS_CATEGORIAS . ".fk_categoria" => $v["pk_categoria"],
+                            TBL_PRODUCTOS_VS_CATEGORIAS . ".fk_estatus" => 1,
+                            TBL_PRODUCTOS . ".fk_estatus" => 1
+                        );
+                        $productos = $Shop->getProducto($params, 0, 99);
+                    }
 
-                                        
-<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="50%"valign="top" style="border:0px solid #e9e9e9;  <?php if(isset($productos["results"][$a-2])){ ?> border-top:0px; <?php } ?>">                            
-                            
-   <div style="float:left; margin-bottom:10px; margin-right: 10px;">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
-  <tr>
-    <td width="1"><img src="images/new/tau_tl.png" width="11" height="36" /></td>
-    <td background="images/new/tauf_top.png" style="text-align:left;"><span class="titulo21"><?=$productos["results"][$a]["nombre" . $_SESSION["LOCALE"]]?></span></td>
-    <td width="1"><img src="images/new/tauf_tr.png" width="11" height="36" /></td>
-  </tr>
-  <tr>
-    <td background="images/new/tauf_left.png">&nbsp;</td>
-    <td>    
-    <table>
-    <tr>
-    <td valign="top">    
-    <div style="float:left; font-weight:normal; font-size:11px"> 
-    <p style="margin-top:10px; text-align: left;"><?=$productos["results"][$a]["sumario" . $_SESSION["LOCALE"]]?></p>
-    </div>
-    </td>
-    <td align="right" valign="top">    
-    <?php if(isset($productos["results"][$a])){ ?>   
-    <a href="?module=product_detail&pkcat=<?=$_GET["i"]?>&pro=<?=md5( HASH . $productos["results"][$a]["pk_producto"])?><?=$productos["results"][$a]["pk_producto"]?>">
-    <img src="/images/products/tb2_<?=$productos["results"][$a]["pk_producto"]?>.jpg" alt="" width="128" height="93" align="right" border="0" style="margin-left:8px" /></a>
-    <?php } ?>
-    </td>
-    </tr>
-    </table>        
-    </td>
-    <td background="images/new/tauf_right.png">&nbsp;</td>
-  </tr>
-  <tr>
-    <td><img src="images/new/tauf_bl.png" width="11" height="10" /></td>
-    <td background="images/new/tauf_bot.png"></td>
-    <td><img src="images/new/tauf_br.png" width="11" height="10" /></td>
-  </tr>
-</table>
- </div>
- 
-</td>           
-<td width="50%" valign="top" style="border:0px solid #e9e9e9; border-left:0px; <?php if(!isset($productos["results"][$a+1])){ ?> border:0px; visibility: hidden; <?php } ?><?php if(isset($productos["results"][$a-2])){ ?> border-top:0px; <?php } ?> ">                                     
+                    //echo sizeof($productos["results"]);
 
-    <div style="float:left; margin-bottom:10px; margin-right: 10px;">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
-  <tr>
-    <td width="1"><img src="images/new/tau_tl.png" width="11" height="36" /></td>
-    <td background="images/new/tauf_top.png" style="text-align:left;"><span class="titulo21"><?=$productos["results"][$a+1]["nombre" . $_SESSION["LOCALE"]]?></span></td>
-    <td width="1"><img src="images/new/tauf_tr.png" width="11" height="36" /></td>
-  </tr>
-  <tr>
-    <td background="images/new/tauf_left.png">&nbsp;</td>
-    <td>
-    <table>
-    <tr>
-    <td valign="top">
-    <div style="float:left; font-weight:normal; font-size:11px">     
-    <p style="margin-top:10px; text-align: left;"><?=$productos["results"][$a+1]["sumario" . $_SESSION["LOCALE"]]?></p>
-    </div> 
-    </td>
-    <td align="right" valign="top">
-    <?php if(isset($productos["results"][$a+1])){ ?>
-    <a href="?module=product_detail&pkcat=<?=$_GET["i"]?>&pro=<?=md5( HASH . $productos["results"][$a+1]["pk_producto"])?><?=$productos["results"][$a+1]["pk_producto"]?>">
-    <img src="/images/products/tb2_<?=$productos["results"][$a+1]["pk_producto"]?>.jpg" alt="" width="128" height="93" align="right" border="0" style="margin-left:8px;"/></a>                
-    <?php } ?>
-    </td>
-    </tr>
-    </table>
-    </td>
-    <td background="images/new/tauf_right.png">&nbsp;</td>
-  </tr>
-  <tr>
-    <td><img src="images/new/tauf_bl.png" width="11" height="10" /></td>
-    <td background="images/new/tauf_bot.png"></td>
-    <td><img src="images/new/tauf_br.png" width="11" height="10" /></td>
-  </tr>
-</table>
+                    if (sizeof($productos["results"]) > 0) {
+                        for ($a = 0; $a < sizeof($productos["results"]); $a = $a + 2){
+                            
+                            print_r('a + 1: '.$a + 1);
+                            print_r('a: '.$a);
+                            
+                            
+                            ?>                           
+
+                            <div class="col-sm-6 col-md-4 isotope-item ventas-menor">
+                                <div class="box-style-1 white-bg">
+                                    <div>
+                                        <?php if (isset($productos["results"][$a])) { ?>
+                                            <img src="/images/products/tb2_<?= $productos["results"][$a]["pk_producto"] ?>.jpg"/>
+                                            <a href="?module=product_detail&pkcat=<?= $_GET["i"] ?>&pro=<?= md5(HASH . $productos["results"][$a]["pk_producto"]) ?><?= $productos["results"][$a]["pk_producto"] ?>" class="overlay small">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        <?php } ?>
+                                    </div>       
+                                    <h3><?= $productos["results"][$a]["nombre" . $_SESSION["LOCALE"]] ?></h3>
+                                    <p><?= $productos["results"][$a]["sumario" . $_SESSION["LOCALE"]] ?></p><br>
+                                </div>       
+                            </div>  
+
+                            <div class="col-sm-6 col-md-4 isotope-item ventas-menor">
+                                <div class="box-style-1 white-bg">
+                                    <div>
+                                        <?php if (isset($productos["results"][$a + 1])) { ?>
+                                            <img src="/images/products/tb2_<?= $productos["results"][$a + 1]["pk_producto"] ?>.jpg"/>
+                                            <a href="?module=product_detail&pkcat=<?= $_GET["i"] ?>&pro=<?= md5(HASH . $productos["results"][$a + 1]["pk_producto"]) ?><?= $productos["results"][$a + 1]["pk_producto"] ?>" class="overlay small">
+
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        <?php } ?>
+                                    </div>
+                                    <h3><?= $productos["results"][$a + 1]["nombre" . $_SESSION["LOCALE"]] ?></h3>
+                                    <p><?= $productos["results"][$a + 1]["sumario" . $_SESSION["LOCALE"]] ?></p><br>
+                                </div>       
+                            </div>
+                        <?php } ?>   
+                    <?php } ?>   
+                <?php } ?>
+
+
+            </div>
+        </div>
     </div>
-    </td>
-  </tr>                                 
-</table>  
-                            
-                            
-                            
-                            
-                            
-                              
-                                <?php } ?>   
-                                </th>
-                              </tr>
-                            </table>
-                            <?php } ?>
-                           </th>
-                        </tr>
-                      </table></th>
-                  </tr>
-                </table>
-                
-                  </th>
-                 
-                <th width="260" align="center" valign="top" scope="col"><?php require("inc_right.php") ?></th>
-              </tr>
-              <tr>
-                <th scope="col">&nbsp;</th>
-                <th align="center" valign="top" scope="col">&nbsp;</th>
-              </tr>
-          </table>
-          <script type="text/javascript">
-swfobject.registerObject("FlashID");
-</script>
+    
+</div>
+
+</section>
+
+
