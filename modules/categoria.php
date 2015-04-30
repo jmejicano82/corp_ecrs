@@ -64,9 +64,9 @@ if (isset($_GET["buscar"])) {
                 <div class="filters text-center">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#" data-filter="*">Todas</a></li>
-                        <li><a href="#" data-filter=".portatiles">Portátiles</a></li>
-                        <li><a href="#" data-filter=".ventas-menor">Ventas al por menor</a></li>
-                        <li><a href="#" data-filter=".multi">Multiples Propósitos</a></li>
+                        <li><a href="#" data-filter="#portatiles">Portátiles</a></li>
+                        <li><a href="#" data-filter="#por_menor">Ventas al por menor</a></li>
+                        <li><a href="#" data-filter="#multiples">Multiples Propósitos</a></li>
                     </ul>
                 </div>
                 <!-- isotope filters end -->
@@ -76,24 +76,28 @@ if (isset($_GET["buscar"])) {
         </div>
     </div>
     
-<div class="container">    
+   
 
     <div class="gray-bg section">
         <div class="container">
             <div class="isotope-container row grid-space-11">
 
                 <?php foreach ($rscch2["results"] as $k => $v) { ?>
-                    <?php if (!isset($_GET["buscar"])) { ?>
-                        <br />
+                    <?php if (!isset($_GET["buscar"])) { 
+                                    
+                        $tipo_categorias = $v["categoria"];
 
-                        <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <th align="left" scope="col" style="text-align:justify"><span class="trebuchet_gris15"><strong><?= $v["categoria"] ?></strong></span><br />
-                                    <?= $v["texto"] ?></th>
-                            </tr>
-                        </table>
-                        <br />
-                    <?php } ?>
+                        if($tipo_categorias == 'Cajas Registradoras Fiscales Portátiles'){
+                            $show_category = 'portatiles';
+                        }
+                        if($tipo_categorias == 'Cajas Registradoras Fiscales para Ventas al por Menor'){
+                            $show_category = 'por_menor';
+                        }
+                        if($tipo_categorias == 'Cajas Registradoras de Múltiples-Propósitos'){
+                            $show_category = 'multiples';
+                        }
+                        
+                    } ?>
 
                     <?php if (isset($_GET["buscar"]) && sizeof($productos["results"]) == 0) { ?>
 
@@ -117,50 +121,51 @@ if (isset($_GET["buscar"])) {
                     //echo sizeof($productos["results"]);
 
                     if (sizeof($productos["results"]) > 0) {
-                        for ($a = 0; $a < sizeof($productos["results"]); $a = $a + 2){
-                            
-                            print_r('a + 1: '.$a + 1);
-                            print_r('a: '.$a);
-                            
-                            
-                            ?>                           
+                        for ($a = 0; $a < sizeof($productos["results"]); $a = $a + 2){ ?>                           
 
-                            <div class="col-sm-6 col-md-4 isotope-item ventas-menor">
-                                <div class="box-style-1 white-bg">
-                                    <div>
-                                        <?php if (isset($productos["results"][$a])) { ?>
-                                            <img src="/images/products/tb2_<?= $productos["results"][$a]["pk_producto"] ?>.jpg"/>
-                                            <a href="?module=product_detail&pkcat=<?= $_GET["i"] ?>&pro=<?= md5(HASH . $productos["results"][$a]["pk_producto"]) ?><?= $productos["results"][$a]["pk_producto"] ?>" class="overlay small">
-                                                <i class="fa fa-plus"></i>
-                                            </a>
-                                        <?php } ?>
-                                    </div>       
-                                    <h3><?= $productos["results"][$a]["nombre" . $_SESSION["LOCALE"]] ?></h3>
-                                    <p><?= $productos["results"][$a]["sumario" . $_SESSION["LOCALE"]] ?></p><br>
-                                </div>       
-                            </div>  
+                        
+                            <div class="container"> 
+                                <?php if (isset($productos["results"][$a])) { ?>
+                                    <div class="col-sm-6 col-md-4 isotope-item" id="<?php echo $show_category;?>">
+                                        <div class="box-style-1 white-bg">
+                                            <div>
+                                                <img src="/images/products/tb2_<?= $productos["results"][$a]["pk_producto"] ?>.jpg"/>
+                                                <a href="?module=product_detail&pkcat=<?= $_GET["i"] ?>&pro=<?= md5(HASH . $productos["results"][$a]["pk_producto"]) ?><?= $productos["results"][$a]["pk_producto"] ?>" class="overlay small">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                            <h3><?= $productos["results"][$a]["nombre" . $_SESSION["LOCALE"]] ?></h3>
+                                            <div style="width:350px; height:100px; overflow:hidden;" class="text-center">
+                                                <p><?= $productos["results"][$a]["sumario" . $_SESSION["LOCALE"]] ?></p>
+                                            </div>
+                                        </div>       
+                                    </div> 
+                                <?php } ?>
 
-                            <div class="col-sm-6 col-md-4 isotope-item ventas-menor">
-                                <div class="box-style-1 white-bg">
-                                    <div>
-                                        <?php if (isset($productos["results"][$a + 1])) { ?>
-                                            <img src="/images/products/tb2_<?= $productos["results"][$a + 1]["pk_producto"] ?>.jpg"/>
-                                            <a href="?module=product_detail&pkcat=<?= $_GET["i"] ?>&pro=<?= md5(HASH . $productos["results"][$a + 1]["pk_producto"]) ?><?= $productos["results"][$a + 1]["pk_producto"] ?>" class="overlay small">
-
-                                                <i class="fa fa-plus"></i>
-                                            </a>
-                                        <?php } ?>
+                                <?php if (isset($productos["results"][$a + 1])) { ?>
+                                    <div class="col-sm-6 col-md-4 isotope-item" id="<?php echo $show_category;?>">
+                                        <div class="box-style-1 white-bg">
+                                            <div>
+                                                <img src="/images/products/tb2_<?= $productos["results"][$a + 1]["pk_producto"] ?>.jpg"/>
+                                                <a href="?module=product_detail&pkcat=<?= $_GET["i"] ?>&pro=<?= md5(HASH . $productos["results"][$a + 1]["pk_producto"]) ?><?= $productos["results"][$a + 1]["pk_producto"] ?>" class="overlay small">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                            
+                                                <h3><?= $productos["results"][$a + 1]["nombre" . $_SESSION["LOCALE"]] ?></h3>
+                                                <div style="width:350px; height:100px; overflow:hidden;" class="text-center">
+                                                <p><?= $productos["results"][$a + 1]["sumario" . $_SESSION["LOCALE"]] ?></p>
+                                            </div>
+                                        </div>       
                                     </div>
-                                    <h3><?= $productos["results"][$a + 1]["nombre" . $_SESSION["LOCALE"]] ?></h3>
-                                    <p><?= $productos["results"][$a + 1]["sumario" . $_SESSION["LOCALE"]] ?></p><br>
-                                </div>       
+                                <?php } ?>
                             </div>
                         <?php } ?>   
                     <?php } ?>   
                 <?php } ?>
 
 
-            </div>
+            
         </div>
     </div>
     

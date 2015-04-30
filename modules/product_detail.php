@@ -5,7 +5,6 @@ if(isset($_GET["pro"])){ //lo esta agregando via link
 		$rs = $Shop->getProducto(array("pk_producto" => intval($pk_pro)));
 		$rsRelacionados = $Shop->getProductoRelacionado($pk_pro);
 		$value =$rs["results"][0];    
-        //var_dump($value);
 		$picW = 290;
 		$picH=185;
 		$picN=0;
@@ -55,20 +54,112 @@ jQuery(document).ready(function($) {
 
 <table width="980" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <th valign="top" class="container" scope="col">
-      <table width="980" border="0" cellspacing="0" cellpadding="0">
-        <tr><td>                       
-        <?php if(file_exists(SERVER_ROOT . "images/products/ban" . $_SESSION["LOCALE"] . "_" . $value["pk_producto"] . ".jpg")) { ?>
-          <img src="/images/products/ban<?=$_SESSION["LOCALE"]?>_<?=$value["pk_producto"]?>.jpg" border="0" />
-        <?php } ?>        
-        </td></tr>
-      </table>      
-      <table width="982" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top: 10px;">
-        <tr>
-          <th colspan="7" background="images/new/titulo.jpg" style="text-align: left"><span class="titulo1"><span class="Mapa">&nbsp;&nbsp;<?=$value["nombre" . $_SESSION["LOCALE"]]?></span></span></th>
-          <td><img src="images/new/spacer.gif" width="1" height="35" border="0" alt="" /></td>
-        </tr>
-      </table>
+    <th valign="top" class="container" scope="col">  
+  
+  
+  
+  
+  
+  
+    <section class="main-container">
+
+        <div class="container">
+
+                        <!-- main start -->
+                        <!-- ================ -->
+                        <div class="main col-md-12">
+
+                                <!-- page-title start -->
+                                <!-- ================ -->
+                                <h1 class="page-title margin-top-clear"><?=$value["nombre" . $_SESSION["LOCALE"]]?></h1>
+                                <!-- page-title end -->
+
+                                        <div class="col-md-6">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-pills white space-top" role="tablist">
+                                                        <li class="active"><a href="#product-images" role="tab" data-toggle="tab" title="images"><i class="fa fa-camera pr-5"></i>Fotos</a></li>
+                                                        <li><a href="#product-video" role="tab" data-toggle="tab" title="video"><i class="fa fa-video-camera pr-5"></i> Video</a></li>
+                                                </ul>
+
+                                                <!-- Tab panes start-->
+                                                <div class="tab-content clear-style">
+                                                        <div class="tab-pane active" id="product-images">
+                                                                <div class="owl-carousel content-slider-with-controls-bottom">
+                                                                    
+                                                                        <div class="overlay-container">
+                                                                            <img src="/images/products/pic_1_<?=$value["pk_producto"]?>big.jpg" width="455" height="390" alt="producto" border="0" />
+                                                                            <a href="/images/products/pic_1_<?=$value["pk_producto"]?>big.jpg" class="popup-img overlay" title="<?=$value["nombre" . $_SESSION["LOCALE"]]?>"><i class="fa fa-search-plus"></i></a>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="tab-pane" id="product-video">
+
+                                                                <div class="embed-responsive embed-responsive-16by9">
+
+                                                                        <iframe class="embed-responsive-item" src="//player.vimeo.com/video/29198414?byline=0&amp;portrait=0"></iframe>
+
+                                                                        <p><a href="http://vimeo.com/29198414">Introducing Vimeo Music Store</a> from <a href="http://vimeo.com/staff">Vimeo Staff</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!-- Tab panes end-->
+
+
+
+                                        </div>
+
+                                        <!-- product side start -->
+                                        <aside class="col-md-6">
+                                                <div class="sidebar">
+                                                        <div class="side product-item vertical-divider-left" style="padding-left: 30px; height: 450px;">
+                                                                <div class="tabs-style-2">
+                                                                        <!-- Nav tabs -->
+                                                                        <ul class="nav nav-tabs" role="tablist">
+                                                                                <li class="active"><a href="JavaScript:void(shtb(1,'t',1))" id="lnk1t" role="tab" data-toggle="tab"><i class="fa fa-file-text-o pr-5"></i><?=_("General")?></a></li>
+                                                                                <li><a href="JavaScript:void(shtb(2,'t',1))" id="lnk2t" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-5"></i><?=_("Valor")?></a></li>
+                                                                                <li><a href="JavaScript:void(shtb(3,'t',1))" id="lnk3t" role="tab" data-toggle="tab"><i class="fa fa-star pr-5"></i><?=_("Referencias")?></a></li>
+                                                                        </ul>
+                                                                        <!-- Tab panes -->
+                                                                        <div class="tab-content padding-top-clear padding-bottom-clear">
+                                                                            <div class="tab-pane fade in active" id="ctb1t">
+                                                                                <br><p><?=$value["general" . $_SESSION["LOCALE"]]?></p>
+                                                                            </div>
+                                                                            <div class="tab-pane fade" id="ctb2t">
+                                                                                <br><p><?=$value["valor" . $_SESSION["LOCALE"]]?></p>
+                                                                            </div>
+                                                                            <div class="tab-pane fade" id="ctb3t">
+                                                                                <br><p<?=$value["referencias" . $_SESSION["LOCALE"]]?>></p>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </aside>
+                                        <!-- product side end -->
+                        </div>
+                        <!-- main end -->
+        </div>
+    </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
       <br />
       <table width="888" border="0" align="center" cellpadding="0" cellspacing="0"> 
         <tr> 
@@ -98,7 +189,7 @@ jQuery(document).ready(function($) {
             </tr>
           </table>
             <br />
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
               
               <tr>
                 <td align="left" class="productodeta_text" valign="top">
@@ -155,7 +246,7 @@ jQuery(document).ready(function($) {
         </tr>
       </table>
       <br />
-      <table width="890" border="0" align="center" cellpadding="0" cellspacing="0" id="contenido_detalle_b">
+      <table width="890" border="0" align="center" cellpadding="0" cellspacing="0">
         
         <tr><td style="text-align:left">
         <div id="ctb1b" class="tabcontenidob"><?=$value["especificaciones" . $_SESSION["LOCALE"]]?></div>

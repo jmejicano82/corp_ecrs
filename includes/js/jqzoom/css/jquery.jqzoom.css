@@ -39,7 +39,7 @@
 	opacity: 0.6;
 	filter: alpha(opacity = 60);
 	z-index:120;
-	position:absolute;
+	position:initial;
 	border:1px solid #CCC;
   z-index:101;
   cursor:crosshair;
